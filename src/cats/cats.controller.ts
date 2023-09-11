@@ -1,8 +1,16 @@
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
-//import { Cat } from './schemas/cat.schema';
+import { Cat } from './schemas/cat.schema';
 
 @Controller('app')
 export class CatsController {
@@ -14,8 +22,8 @@ export class CatsController {
   }
 
   @Get('get')
-  findAll(): string {
-    return 'Done';
+  findAll(): Promise<Cat[]> {
+    return this.catsService.findAll();
   }
 
   @Put('update')
@@ -23,7 +31,7 @@ export class CatsController {
     return this.catsService.update(updateCatDto);
   }
 
-  /*@Get(':id')
+  @Get(':id')
   async findOne(@Param('id') id: string): Promise<Cat> {
     return this.catsService.findOne(id);
   }
@@ -31,5 +39,5 @@ export class CatsController {
   @Delete(':id')
   async delete(@Param('id') id: string) {
     return this.catsService.delete(id);
-  }*/
+  }
 }
