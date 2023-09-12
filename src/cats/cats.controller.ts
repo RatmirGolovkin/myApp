@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
-import { UpdateCatDto } from './dto/update-cat.dto';
 import { Cat } from './schemas/cat.schema';
+import { UpdateCatDto } from './dto/update-cat.dto';
 
-@Controller('app')
+@Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
@@ -26,9 +26,9 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Put('update')
-  update(@Body() updateCatDto: UpdateCatDto) {
-    return this.catsService.update(updateCatDto);
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
+    return this.catsService.updateOne(id, updateCatDto);
   }
 
   @Get(':id')

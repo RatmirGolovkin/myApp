@@ -14,9 +14,11 @@ export class CatsService {
     return createdCat;
   }
 
-  async update(updateCatDto: UpdateCatDto): Promise<Cat> {
-    const updateCat = await this.catModel.create(updateCatDto);
-    return updateCat;
+  async updateOne(request: string, updateCatDto: UpdateCatDto) {
+    return await this.catModel.findByIdAndUpdate(request, updateCatDto, {
+      new: true,
+      upsert: true,
+    });
   }
 
   async findAll(): Promise<Cat[]> {
