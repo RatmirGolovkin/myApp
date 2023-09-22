@@ -14,8 +14,8 @@ export class CatsService {
     return createdCat;
   }
 
-  async updateOne(request: string, updateCatDto: UpdateCatDto) {
-    return await this.catModel.findByIdAndUpdate(request, updateCatDto, {
+  async updateOne(request: UpdateCatDto): Promise<Cat> {
+    return await this.catModel.findByIdAndUpdate(request.id, request, {
       new: true,
       upsert: true,
     });

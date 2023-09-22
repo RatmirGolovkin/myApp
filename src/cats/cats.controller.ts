@@ -26,9 +26,9 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
-    return this.catsService.updateOne(id, updateCatDto);
+  @Put('update')
+  async update(@Body() request: UpdateCatDto) {
+    return this.catsService.updateOne(request);
   }
 
   @Get(':id')

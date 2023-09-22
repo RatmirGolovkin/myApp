@@ -1,5 +1,12 @@
+import { IsNumber, IsString } from 'class-validator';
+
 export class UpdateCatDto {
-  readonly name: string;
-  readonly age: number;
-  readonly breed: string;
+  @IsString()
+  id: string;
+  @IsString()
+  name: string;
+  @IsNumber()
+  age: number;
+  @IsString()
+  breed: string;
 }
